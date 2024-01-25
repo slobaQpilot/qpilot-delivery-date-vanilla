@@ -12,6 +12,7 @@
     "vite": "^5.0.8"
   },
   "dependencies": {
-    "qpilot-delivery-date": "^0.0.21"
+    "material-symbols": "^0.14.6",
+    "qpilot-delivery-date": "^0.0.28"
   }
 }
