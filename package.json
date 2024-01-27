@@ -13,6 +13,6 @@
   },
   "dependencies": {
     "material-symbols": "^0.14.6",
-    "qpilot-delivery-date": "^0.0.31"
+    "qpilot-delivery-date": "^0.0.32"
   }
 }
