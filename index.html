@@ -12,6 +12,29 @@
     <script type="module">
       import "qpilot-delivery-date";
     </script>
-    <qpilot-delivery-date></qpilot-delivery-date>
+    <qpilot-delivery-date
+      *ngIf="siteId"
+      deliveryDate="2024-2-10"
+      siteId="8"
+      shippingDetails='{
+          "OrderId": 11493,
+          "shippingAddress": {
+              "street": "100 Congress Avenue",
+              "city": "Austin",
+              "state": "TX",
+              "country": "US",
+              "postalCode": "78767"
+          },
+          "items": [
+              {
+                  "id": 41597,
+                  "productId": "11033",
+                  "qty": 1,
+                  "regularPrice": 38.00,
+                  "salePrice": 36.10
+              }
+          ]
+          }'
+    ></qpilot-delivery-date>
   </body>
 </html>
