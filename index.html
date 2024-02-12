@@ -8,32 +8,183 @@
     <link rel="stylesheet" href="./node_modules/material-symbols/index.css" />
   </head>
   <body>
-    <div id="app"></div>
     <script type="module">
       import "qpilot-delivery-date";
     </script>
-    <qpilot-delivery-date
-      deliveryDate="2024-2-10"
-      siteId="8"
-      shippingDetails='{
-          "OrderId": 11493,
-          "shippingAddress": {
-              "street": "100 Congress Avenue",
-              "city": "Austin",
-              "state": "TX",
+    <select id="addressSelect">
+      <option>Select Address</option>
+      <option
+        value='{
+            "name": "10 Sims Ave",
+            "street": "10 Sims Ave",
+            "street2": null,
+            "city": "Providence",
+            "state": "RI",
+            "postalCode": "02909",
+            "country": "US"
+            }'
+      >
+        Address 1
+      </option>
+      <option
+        value='{
+              "street": "289 Buxton Street",
+              "city": "North Smithfield",
+              "state": "RI",
               "country": "US",
-              "postalCode": "78767"
-          },
-          "items": [
-              {
-                  "id": 41597,
-                  "productId": "11033",
-                  "qty": 1,
-                  "regularPrice": 38.00,
-                  "salePrice": 36.10
-              }
-          ]
+              "postalCode": "06277"
           }'
+      >
+        Address 2
+      </option>
+      <option
+        value='{
+              "street": "8 Conifer Court",
+              "city": "Coventry",
+              "state": "RI",
+              "country": "US",
+              "postalCode": "02816"
+          }'
+      >
+        Address 3
+      </option>
+    </select>
+    <select id="orderSelect">
+      <option>Select Order</option>
+      <option
+        value='{
+              "OrderId": 245244,
+              "shippingAddress": {},
+              "items": [{
+                  "id": 908752,
+                  "productId": "6313",
+                  "qty": 1,
+                  "regularPrice": 8.75,
+                  "salePrice": 7.44
+              }, {
+                  "id": 977254,
+                  "productId": "512905",
+                  "qty": 3,
+                  "regularPrice": 11.50,
+                  "salePrice": 9.77
+              }, {
+                  "id": 977255,
+                  "productId": "474162",
+                  "qty": 1,
+                  "regularPrice": 8.75,
+                  "salePrice": 7.44
+              }]
+          }'
+      >
+        Order 1
+      </option>
+      <option
+        value='{
+              "OrderId": 641390,
+              "shippingAddress": { },
+              "items": [{
+                  "id": 986006,
+                  "productId": "6312",
+                  "qty": 1,
+                  "regularPrice": 31.00,
+                  "salePrice": 26.35
+              },{
+                  "id": 986007,
+                  "productId": "4007",
+                  "qty": 1,
+                  "regularPrice": 10.75,
+                  "salePrice": 9.14
+              },{
+                  "id": 986008,
+                  "productId": "505966",
+                  "qty": 1,
+                  "regularPrice": 6.00,
+                  "salePrice": 5.10
+              },{
+                  "id": 986009,
+                  "productId": "474162",
+                  "qty": 2,
+                  "regularPrice": 8.75,
+                  "salePrice": 7.44
+              }]
+          }'
+      >
+        Order 2
+      </option>
+      <option
+        value='{
+              "OrderId": 245299,
+              "shippingAddress": { },
+              "items": [{
+                  "id": 571386,
+                  "productId": "6312",
+                  "qty": 1,
+                  "regularPrice": 31.00,
+                  "salePrice": 26.35
+              },{
+                  "id": 840998,
+                  "productId": "4147",
+                  "qty": 2,
+                  "regularPrice": 10.75,
+                  "salePrice": 9.14
+              },{
+                  "id": 840999,
+                  "productId": "4007",
+                  "qty": 2,
+                  "regularPrice": 10.75,
+                  "salePrice": 9.14
+              },{
+                  "id": 891685,
+                  "productId": "512905",
+                  "qty": 1,
+                  "regularPrice": 11.50,
+                  "salePrice": 9.77
+              }]
+          }'
+      >
+        Order 3
+      </option>
+    </select>
+    <qpilot-delivery-date
+      id="deliveryComponent"
+      deliveryDate="2024-02-22"
+      siteId="8"
+      shippingAddress="{}"
+      order="{}"
     ></qpilot-delivery-date>
+
+    <script>
+      document
+        .querySelector("qpilot-delivery-date")
+        .addEventListener("onDateUpdate", (event) => {
+          alert(`Delivery updated to: ${event.detail.date}`);
+        });
+
+      document.addEventListener("DOMContentLoaded", function () {
+        const selectAddressElement = document.getElementById("addressSelect");
+        const selectOrderElement = document.getElementById("orderSelect");
+        const deliveryComponent = document.getElementById("deliveryComponent");
+
+        selectAddressElement.addEventListener("change", function () {
+          const selectedAddress = JSON.parse(this.value);
+
+          // Update the attribute with the new, updated shippingDetails
+          deliveryComponent.setAttribute(
+            "shippingAddress",
+            JSON.stringify(selectedAddress)
+          );
+        });
+
+        selectOrderElement.addEventListener("change", function () {
+          const selectedOrder = JSON.parse(this.value);
+
+          // Update the attribute with the new, updated shippingDetails
+          deliveryComponent.setAttribute(
+            "order",
+            JSON.stringify(selectedOrder)
+          );
+        });
+      });
+    </script>
   </body>
 </html>
